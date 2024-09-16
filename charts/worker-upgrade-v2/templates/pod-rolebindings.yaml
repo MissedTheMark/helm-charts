@@ -1,0 +1,39 @@
+{{- $podServiceAccountName := include "kubernetes-agent.scriptPodServiceAccountName" . -}}
+{{- $podServiceAccountFullName := include "kubernetes-agent.scriptPodServiceAccountFullName" . -}}
+{{- $podClusterRoleName := include "kubernetes-agent.scriptPodClusterRoleName" . -}}
+{{- $podDeleterClusterRoleName := include "kubernetes-agent.scriptPodDeleterClusterRoleName" . -}}  
+
+{{- if .Values.agent.deploymentTarget.enabled }}
+{{- range $targetNamespace := $.Values.scriptPods.serviceAccount.targetNamespaces }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ printf "%s-binding" $podServiceAccountFullName }}
+  namespace: {{ $targetNamespace | quote }}
+subjects:
+- kind: ServiceAccount
+  name: {{ $podServiceAccountName }}
+  namespace: {{ $.Release.Namespace | quote }}
+roleRef:
+  kind: ClusterRole
+  name: {{ $podClusterRoleName }}
+  apiGroup: rbac.authorization.k8s.io
+{{- end -}}
+{{- end -}}
+{{- if and .Values.persistence.nfs.watchdog.enabled (not .Values.persistence.storageClassName)}}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ printf "%s-deleter-binding" $podServiceAccountFullName }}
+  namespace: {{ .Release.Namespace | quote }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ $podServiceAccountName }}
+    namespace: {{ $.Release.Namespace | quote }}
+roleRef:
+  kind: ClusterRole
+  name: {{ $podDeleterClusterRoleName }}
+  apiGroup: rbac.authorization.k8s.io
+{{- end -}}

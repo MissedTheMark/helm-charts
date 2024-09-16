@@ -1,0 +1,14 @@
+apiVersion: v2
+name: kubernetes-agent
+description: A Helm chart for the Octopus Kubernetes Agent
+home: "https://octopus.com"
+sources:
+  - "https://github.com/OctopusDeploy/helm-charts"
+maintainers:
+  - name: "Octopus Deploy"
+    email: "support@octopus.com"
+    url: "https://octopus.com"
+type: application
+version: "2.3.0"
+# This version number should be the same as the agent.image.tag value as this is the primary application version
+appVersion: "8.2.2165"
