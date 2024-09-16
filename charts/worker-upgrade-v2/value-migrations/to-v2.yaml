@@ -20,5 +20,13 @@ agent:
       {{- if .agent.defaultNamespace }}
       defaultNamespace: "{{ .agent.defaultNamespace}}"
       {{- end }}
+  targetName: null
+  targetEnvironments: null
+  defaultNamespace: null
+  targetRoles: null
+  targetTenantTags: null
+  targetTenants: null
+  targetTenantedDeploymentParticipation: null
+  scriptPods: null
 
 
