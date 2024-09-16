@@ -8,9 +8,17 @@ agent:
     initial:
       environments: [{{ quoteEach .agent.targetEnvironments  }}]
       tags: [{{ quoteEach .agent.targetRoles }} ]
+      {{- if .agent.targetTenantedDeploymentParticipation }}
       targetTenantedDeploymentParticipation: {{ .agent.targetTenantedDeploymentParticipation }}
+      {{ end}}
+      {{- if .agent.targetTenants }}
       tenants: [{{ quoteEach .agent.targetTenants }}]
+      {{- end }}
+      {{- if .agent.targetTenantTags }}
       tenantTags: [{{ quoteEach .agent.targetTenantTags }}]
+      {{- end }}
+      {{- if .agent.defaultNamespace }}
       defaultNamespace: "{{ .agent.defaultNamespace}}"
+      {{- end }}
 
 
