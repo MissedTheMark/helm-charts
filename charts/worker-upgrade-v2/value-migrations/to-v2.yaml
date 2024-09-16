@@ -22,11 +22,20 @@ agent:
       {{- end }}
   targetName: null
   targetEnvironments: null
+  {{- if .agent.defaultNamespace }}
   defaultNamespace: null
+  {{- end}}
   targetRoles: null
+  {{- if .agent.targetTenantTags }}
   targetTenantTags: null
+  {{- end}}
+  {{- if .agent.targetTenants }}
   targetTenants: null
+  {{- end}}
+  {{- if .agent.targetTenantedDeploymentParticipation }}
   targetTenantedDeploymentParticipation: null
-  scriptPods: null
-
-
+  {{- end}}
+  {{- if .agent.scriptPods.image }}
+  scriptPods:
+    image: null
+  {{- end}}
