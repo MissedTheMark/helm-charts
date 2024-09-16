@@ -2,7 +2,9 @@ agent:
   name: "{{ .agent.targetName }}"
   deploymentTarget:
     enabled: true
-    image: {{ .agent.scriptPods.image }}
+    {{- if .agent.scriptPods.image }}
+    image: "{{ .agent.scriptPods.image }}"
+    {{- end }}
     initial:
       environments: [{{ quoteEach .agent.targetEnvironments  }}]
       tags: [{{ quoteEach .agent.targetRoles }} ]
