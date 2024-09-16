@@ -1,0 +1,14 @@
+agent:
+  name: "{{ .agent.targetName }}"
+  deploymentTarget:
+    enabled: true
+    image: {{ .agent.scriptPods.image }}
+    initial:
+      environments: [{{ quoteEach .agent.targetEnvironments  }}]
+      tags: [{{ quoteEach .agent.targetRoles }} ]
+      targetTenantedDeploymentParticipation: {{ .agent.targetTenantedDeploymentParticipation }}
+      tenants: [{{ quoteEach .agent.targetTenants }}]
+      tenantTags: [{{ quoteEach .agent.targetTenantTags }}]
+      defaultNamespace: "{{ .agent.defaultNamespace}}"
+
+
