@@ -2,14 +2,11 @@ agent:
   name: "{{ .agent.targetName }}"
   deploymentTarget:
     enabled: true
-    {{- if .agent.scriptPods.image }}
-    image: "{{ .agent.scriptPods.image }}"
-    {{- end }}
     initial:
       environments: [{{ quoteEach .agent.targetEnvironments  }}]
       tags: [{{ quoteEach .agent.targetRoles }} ]
       {{- if .agent.targetTenantedDeploymentParticipation }}
-      targetTenantedDeploymentParticipation: {{ .agent.targetTenantedDeploymentParticipation }}
+      tenantedDeploymentParticipation: {{ .agent.targetTenantedDeploymentParticipation }}
       {{ end}}
       {{- if .agent.targetTenants }}
       tenants: [{{ quoteEach .agent.targetTenants }}]
@@ -19,13 +16,13 @@ agent:
       {{- end }}
       {{- if .agent.defaultNamespace }}
       defaultNamespace: "{{ .agent.defaultNamespace}}"
-      {{- end }}
+      {{- end }}  
   targetName: null
   targetEnvironments: null
+  targetRoles: null
   {{- if .agent.defaultNamespace }}
   defaultNamespace: null
   {{- end}}
-  targetRoles: null
   {{- if .agent.targetTenantTags }}
   targetTenantTags: null
   {{- end}}
@@ -35,7 +32,18 @@ agent:
   {{- if .agent.targetTenantedDeploymentParticipation }}
   targetTenantedDeploymentParticipation: null
   {{- end}}
-  {{- if .agent.scriptPods.image }}
-  scriptPods:
-    image: null
-  {{- end}}
+{{- if .scriptPods.image }}
+scriptPods:
+  image: null
+  deploymentTarget:
+    image: 
+      {{- if .scriptPods.image.repository }}
+      repository: "{{ .scriptPods.image.repository }}"
+      {{- end }}
+      {{- if .scriptPods.image.pullPolicy }}
+      pullPolicy: "{{ .scriptPods.image.pullPolicy }}"
+      {{- end }}
+      {{- if .scriptPods.image.tag }}
+      tag: "{{ .scriptPods.image.tag }}"
+      {{- end }}
+{{- end}}
