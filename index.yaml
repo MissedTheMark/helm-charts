@@ -3,6 +3,23 @@ entries:
   kubernetes-agent:
   - apiVersion: v2
     appVersion: 8.2.2165
+    created: "2024-09-24T08:36:38.423058418Z"
+    description: A Helm chart for the Octopus Kubernetes Agent
+    digest: d1526484ffd4819136156ff96bb5b73c76adac848fd188dc38c0f5dee4124103
+    home: https://octopus.com
+    maintainers:
+    - email: support@octopus.com
+      name: Octopus Deploy
+      url: https://octopus.com
+    name: kubernetes-agent
+    sources:
+    - https://github.com/OctopusDeploy/helm-charts
+    type: application
+    urls:
+    - https://github.com/MissedTheMark/helm-charts/releases/download/kubernetes-agent-2.3.6/kubernetes-agent-2.3.6.tgz
+    version: 2.3.6
+  - apiVersion: v2
+    appVersion: 8.2.2165
     created: "2024-09-16T07:18:19.453276412Z"
     description: A Helm chart for the Octopus Kubernetes Agent
     digest: f61e43866f9593e33c8401391da4384f7cf876d78aa85f261c6e9c48178d9e72
@@ -120,4 +137,4 @@ entries:
     urls:
     - https://github.com/MissedTheMark/helm-charts/releases/download/kubernetes-agent-1.17.0/kubernetes-agent-1.17.0.tgz
     version: 1.17.0
-generated: "2024-09-16T07:18:19.453345281Z"
+generated: "2024-09-24T08:36:38.423093664Z"
